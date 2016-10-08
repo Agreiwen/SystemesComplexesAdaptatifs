@@ -27,5 +27,9 @@ public class Labyrinthe {
 	public Carte getMap(int i, int j) {
 		return jeu[i][j];
 	}
+	
+	public Carte[][] getJeu(){
+		return jeu;
+	}
 
 }

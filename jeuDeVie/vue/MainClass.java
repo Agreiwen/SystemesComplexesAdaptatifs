@@ -1,5 +1,7 @@
 package jeuDeVie.vue;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 
 import jeuDeVie.modele.Modele;
@@ -15,18 +17,19 @@ public class MainClass extends JFrame{
 	    Modele m = new Modele();
 	    m.affichageLabyrinthe();
 	    
-	    /*VueGraphique vg = new VueGraphique(m);
-	    
-	    VueBoutons vb = new VueBoutons(m);
-	    
+	    VueGraphique vg = new VueGraphique(m);
 	    this.add(vg, BorderLayout.NORTH);
+	    
+	    /*VueBoutons vb = new VueBoutons(m);
+	    
+	   
         this.add(vb, BorderLayout.CENTER);
-        this.setJMenuBar(new VueMenu(m));
+        this.setJMenuBar(new VueMenu(m));*/
 		
         m.miseAJour();
         
         pack() ;
-        setVisible(true);*/
+        setVisible(true);
 	}
 	
 	public static void main(String[] args) {

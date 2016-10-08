@@ -13,6 +13,7 @@ public class Modele extends Observable implements Runnable{
 	protected long TempsArrivee;
 	protected boolean run = false;
 	protected float temps;
+	protected boolean isInitialise = false;
 	
 	public Modele(){
      	labyrinthe = new Labyrinthe();
@@ -100,6 +101,14 @@ public class Modele extends Observable implements Runnable{
 				System.out.print(labyrinthe.getMap(i, j).toString());
 			}System.out.println();
 		}
+	}
+
+	public boolean isInitialise() {
+		return isInitialise;
+	}
+
+	public void setInitialise(boolean b) {
+		this.isInitialise = b;
 	}
 
 }
