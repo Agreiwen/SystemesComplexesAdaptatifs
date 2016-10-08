@@ -2,6 +2,8 @@ package jeuDeVie.modele;
 
 import java.util.Observable;
 
+import jeuDeVie.modele.Carte.TypeMap;
+
 public class Modele extends Observable implements Runnable{
 	
 	protected Labyrinthe labyrinthe;
@@ -91,7 +93,7 @@ public class Modele extends Observable implements Runnable{
 	
 	@Override
 	public void run() {
-		
+		jeuDeLaVie();
 	}
 	
 	public void affichageLabyrinthe(){
@@ -109,6 +111,23 @@ public class Modele extends Observable implements Runnable{
 
 	public void setInitialise(boolean b) {
 		this.isInitialise = b;
+	}
+	
+	public void jeuDeLaVie(){
+		for (int i = 0; i < labyrinthe.hauteurLabyrinthe(); i++) {
+			for (int j = 0; j < labyrinthe.largeurLabyrinthe(); j++) {
+				switch(labyrinthe.getMap(i, j).getTypeMap()){
+				case MORT :
+					if(labyrinthe.getMap(i, j).nbVoisin() == 3){
+						labyrinthe.getMap(i, j).setTypeMap(TypeMap.VIVANT);
+					}
+				case VIVANT :
+					if(labyrinthe.getMap(i, j).nbVosin() < 2 || labyrinthe.getMap(i, j).nbVoisin() > 3){
+						labyrinthe.getMap(i, j).setTypeMap(TypeMap.MORT);
+					}
+				}
+			}
+		}
 	}
 
 }

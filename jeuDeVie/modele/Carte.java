@@ -48,4 +48,9 @@ public class Carte {
 		return "Carte(" + positionX + ", " + positionY + ", " + typeMap + ") ";
 	}
 
+	public int nbVosin() {
+		// TODO La suite au prochain episode
+		return 0;
+	}
+
 }
