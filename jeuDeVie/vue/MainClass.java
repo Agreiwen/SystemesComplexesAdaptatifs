@@ -23,8 +23,8 @@ public class MainClass extends JFrame{
 	    /*VueBoutons vb = new VueBoutons(m);
 	    
 	   
-        this.add(vb, BorderLayout.CENTER);
-        this.setJMenuBar(new VueMenu(m));*/
+        this.add(vb, BorderLayout.CENTER);*/
+        this.setJMenuBar(new VueMenu(m));
 		
         m.miseAJour();
         
