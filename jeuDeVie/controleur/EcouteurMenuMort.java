@@ -4,17 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import jeuDeVie.modele.Modele;
+import jeuDeVie.modele.Modele.TypeSelection;
 
 public class EcouteurMenuMort implements ActionListener {
+	
+	protected Modele m;
 
 	public EcouteurMenuMort(Modele m) {
-		// TODO Auto-generated constructor stub
+		this.m = m;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		m.setTypeSelection(TypeSelection.MORT);
 	}
 
 }

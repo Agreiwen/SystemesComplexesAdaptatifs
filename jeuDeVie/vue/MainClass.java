@@ -15,7 +15,7 @@ public class MainClass extends JFrame{
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
 	    Modele m = new Modele();
-	    m.affichageLabyrinthe();
+	    //m.affichageLabyrinthe();
 	    
 	    VueGraphique vg = new VueGraphique(m);
 	    this.add(vg, BorderLayout.NORTH);

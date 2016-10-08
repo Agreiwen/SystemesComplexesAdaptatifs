@@ -4,19 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import jeuDeVie.modele.Modele;
-import jeuDeVie.modele.Modele.TypeSelection;
 
-public class EcouteurMenuVivant implements ActionListener {
+public class EcouteurMenuAleatoire implements ActionListener {
 	
 	protected Modele m;
 
-	public EcouteurMenuVivant(Modele m) {
+	public EcouteurMenuAleatoire(Modele m) {
 		this.m = m;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		m.setTypeSelection(TypeSelection.VIVANT);
+		m.getLabyrinthe().genereLabyAleatoire();
+		m.miseAJour();
 	}
 
 }

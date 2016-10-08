@@ -6,15 +6,16 @@ import java.awt.event.ActionListener;
 import jeuDeVie.modele.Modele;
 
 public class EcouteurQuitter implements ActionListener {
+	
+	protected Modele m;
 
 	public EcouteurQuitter(Modele m) {
-		// TODO Auto-generated constructor stub
+		this.m = m;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		System.exit(0);
 	}
 
 }

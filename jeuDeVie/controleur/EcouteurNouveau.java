@@ -6,15 +6,16 @@ import java.awt.event.ActionListener;
 import jeuDeVie.modele.Modele;
 
 public class EcouteurNouveau implements ActionListener {
+	
+	protected Modele m;
 
 	public EcouteurNouveau(Modele m) {
-		// TODO Auto-generated constructor stub
+		this.m = m;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		m.getLabyrinthe().creationLaby();
 	}
 
 }

@@ -21,7 +21,6 @@ public class EcouteurBoutonLabyrinthe implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(m.getLabyrinthe().getMap(positionX, positionY).toString()+"\n");
 		if(m.getTypeSelection() == TypeSelection.MORT){
 			m.getLabyrinthe().getMap(positionX, positionY).setTypeMap(TypeMap.MORT);
 			m.miseAJour();
@@ -29,6 +28,7 @@ public class EcouteurBoutonLabyrinthe implements ActionListener {
 			m.getLabyrinthe().getMap(positionX, positionY).setTypeMap(TypeMap.VIVANT);
 		}
 		m.miseAJour();
+		System.out.println(m.getLabyrinthe().getMap(positionX, positionY).toString()+"\n");
 	}
 
 }
