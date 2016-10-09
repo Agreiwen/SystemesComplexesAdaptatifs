@@ -8,6 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import jeuDeVie.controleur.EcouteurMenuAleatoire;
+import jeuDeVie.controleur.EcouteurMenuLancer;
 import jeuDeVie.controleur.EcouteurMenuMort;
 import jeuDeVie.controleur.EcouteurMenuVide;
 import jeuDeVie.controleur.EcouteurMenuVivant;
@@ -30,6 +31,7 @@ protected Modele m;
 	protected JMenuItem jMenuItemVivant;
 	protected JMenu jMenuChoixGrille;
 	protected JMenuItem jMenuVide;
+	protected JMenuItem jMenuLancer;
 
 	public VueMenu(Modele m) {
 		super();
@@ -62,6 +64,10 @@ protected Modele m;
 		jMenuConstruire.add(jMenuItemMort);
 		jMenuConstruire.add(jMenuItemVivant);
 		this.add(jMenuConstruire);
+		
+		jMenuLancer = new JMenuItem("Lancer");
+		jMenuLancer.addActionListener(new EcouteurMenuLancer(m));
+		this.add(jMenuLancer);
 	}
 
 	@SuppressWarnings("deprecation")

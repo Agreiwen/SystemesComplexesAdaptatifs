@@ -13,11 +13,11 @@ import jeuDeVie.modele.Modele;
 public class VueBoutons extends JPanel implements Observer{
 	
 	protected Modele m;
-	protected JLabel JLabelLargeur;
-	protected JLabel JLabelHauteur;
+	protected JLabel JLabelNbMort;
+	protected JLabel JLabelNbVivant;
 	protected JLabel JLabelTemps;
 	protected JLabel JLabelEspace;
-	protected JLabel JLabelEtats;
+	protected JLabel JLabelNbCoup;
 
 	public VueBoutons(Modele mod) {
 		// TODO Auto-generated constructor stub
@@ -32,8 +32,8 @@ public class VueBoutons extends JPanel implements Observer{
 		JLabelEspace = new JLabel();
 		this.add(JLabelEspace);
 		
-		JLabelHauteur = new JLabel();
-		this.add(JLabelHauteur);
+		JLabelNbVivant = new JLabel();
+		this.add(JLabelNbVivant);
 		
 		JLabelEspace = new JLabel();
 		this.add(JLabelEspace);
@@ -49,14 +49,14 @@ public class VueBoutons extends JPanel implements Observer{
 		JLabelEspace = new JLabel();
 		this.add(JLabelEspace);
 		
-		JLabelLargeur = new JLabel();
-		this.add(JLabelLargeur);
+		JLabelNbMort = new JLabel();
+		this.add(JLabelNbMort);
 		
 		JLabelEspace = new JLabel();
 		this.add(JLabelEspace);
 		
-		JLabelEtats = new JLabel();
-		this.add(JLabelEtats);
+		JLabelNbCoup = new JLabel();
+		this.add(JLabelNbCoup);
 		
 		JLabelEspace = new JLabel();
 		this.add(JLabelEspace);
@@ -65,9 +65,10 @@ public class VueBoutons extends JPanel implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		JLabelLargeur.setText("Largeur : "+m.getLargeur());
-		JLabelHauteur.setText("Hauteur : "+m.getHauteur());
+		JLabelNbMort.setText("Nb mort : "+m.getMort());
+		JLabelNbVivant.setText("Nb vivant : "+m.getVivant());
 		JLabelTemps.setText("Temps : "+m.getTemps());
+		JLabelNbCoup.setText("Nb coups : "+m.getCoup());
 	}
 
 }

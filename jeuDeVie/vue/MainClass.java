@@ -20,10 +20,10 @@ public class MainClass extends JFrame{
 	    VueGraphique vg = new VueGraphique(m);
 	    this.add(vg, BorderLayout.NORTH);
 	    
-	    /*VueBoutons vb = new VueBoutons(m);
+	    VueBoutons vb = new VueBoutons(m);
 	    
 	   
-        this.add(vb, BorderLayout.CENTER);*/
+        this.add(vb, BorderLayout.CENTER);
         this.setJMenuBar(new VueMenu(m));
 		
         m.miseAJour();

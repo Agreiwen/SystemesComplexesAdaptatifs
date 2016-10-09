@@ -10,6 +10,7 @@ public class Carte {
 	public Carte(int x, int y){
 		this.positionX = x;
 		this.positionY = y;
+		typeMap = TypeMap.MORT;
 	}
 
 	public Carte(Carte carte) {

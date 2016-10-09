@@ -16,9 +16,11 @@ public class Modele extends Observable implements Runnable{
 	protected boolean run = false;
 	protected float temps;
 	protected boolean isInitialise = false;
+	Carte[][] copie;
 	
 	public Modele(){
      	labyrinthe = new Labyrinthe();
+     	copie = new Carte[getHauteur()][getLargeur()];
 	}
 	
 	public float getTemps() {
@@ -113,21 +115,97 @@ public class Modele extends Observable implements Runnable{
 		this.isInitialise = b;
 	}
 	
-	public void jeuDeLaVie(){
+	public void initCopie(){
+		for (int i = 0; i < copie.length; i++) {
+			for (int j = 0; j < copie[0].length; j++) {
+				copie[i][j] = new Carte(i, j);
+				//System.out.println(test[i][j].toString());
+			}
+		}
+	}
+	
+	public void ecritureCopie(){
 		for (int i = 0; i < labyrinthe.hauteurLabyrinthe(); i++) {
 			for (int j = 0; j < labyrinthe.largeurLabyrinthe(); j++) {
-				switch(labyrinthe.getMap(i, j).getTypeMap()){
-				case MORT :
+				//System.out.print("("+i+","+j+") :");
+				if(labyrinthe.getMap(i, j).getTypeMap() == TypeMap.MORT){
+					//System.out.print(" MORT ");
 					if(labyrinthe.nbVoisin(i,j) == 3){
-						labyrinthe.getMap(i, j).setTypeMap(TypeMap.VIVANT);
+						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> VIVANT");
+						copie[i][j].setTypeMap(TypeMap.VIVANT);
+					}else{
+						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> MORT");
+						copie[i][j].setTypeMap(TypeMap.MORT);
 					}
-				case VIVANT :
+				}
+					
+				else{
+					//System.out.print(" VIVANT ");
 					if(labyrinthe.nbVoisin(i,j) < 2 || labyrinthe.nbVoisin(i,j) > 3){
-						labyrinthe.getMap(i, j).setTypeMap(TypeMap.MORT);
+						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> MORT");
+						copie[i][j].setTypeMap(TypeMap.MORT);
+					}else{
+						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> VIVANT");
+						copie[i][j].setTypeMap(TypeMap.VIVANT);
 					}
+				}
+					
+			}
+		}
+	}
+	
+	public void affichageCopie(){
+		for (int i = 0; i < copie.length; i++) {
+			for (int j = 0; j < copie[0].length; j++) {
+				System.out.println(copie[i][j].toString());
+			}
+		}
+	}
+	
+	public void jeuDeLaVie(){
+		initCopie();
+		ecritureCopie();
+		// Tant que copie est differente de laby.getJeu() Faire...
+		for (int i = 0; i < getHauteur(); i++) {
+			for (int j = 0; j < getLargeur(); j++) {
+				getLabyrinthe().getMap(i, j).setTypeMap(copie[i][j].getTypeMap());
+			}
+		}
+		miseAJour();
+	}
+
+	public int getCoup() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getMort() {
+		int mort = 0;
+		for (int i = 0; i < getHauteur(); i++) {
+			for (int j = 0; j < getLargeur(); j++) {
+				if(getLabyrinthe().getMap(i, j).getTypeMap() ==  TypeMap.MORT){
+					mort++;
 				}
 			}
 		}
+		return mort;
+	}
+
+	public int getVivant() {
+		int vivant = 0;
+		for (int i = 0; i < getHauteur(); i++) {
+			for (int j = 0; j < getLargeur(); j++) {
+				if(getLabyrinthe().getMap(i, j).getTypeMap() ==  TypeMap.VIVANT){
+					vivant++;
+				}
+			}
+		}
+		return vivant;
+	}
+	
+	public void majMortVivant(){
+		getMort();
+		getVivant();
 	}
 
 }

@@ -5,19 +5,18 @@ import java.awt.event.ActionListener;
 
 import jeuDeVie.modele.Modele;
 
-public class EcouteurMenuAleatoire implements ActionListener {
+public class EcouteurMenuLancer implements ActionListener {
 	
 	protected Modele m;
 
-	public EcouteurMenuAleatoire(Modele m) {
+	public EcouteurMenuLancer(Modele m) {
 		this.m = m;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		m.getLabyrinthe().genereLabyAleatoire();
-		m.majMortVivant();
-		m.miseAJour();
+		Thread t = new Thread((Runnable)m, "Traitement-grille");
+		t.start() ;
 	}
 
 }
