@@ -42,15 +42,20 @@ public class Carte {
 	public int getPositionY(){
 		return this.positionY;
 	}
+	
+	public int valeur(){
+		int res;
+		if(this.getTypeMap() == TypeMap.MORT){
+			res = 0;
+		}else{
+			res = 1;
+		}
+		return res;
+	}
 
 	@Override
 	public String toString() {
 		return "Carte(" + positionX + ", " + positionY + ", " + typeMap + ") ";
-	}
-
-	public int nbVosin() {
-		// TODO La suite au prochain episode
-		return 0;
 	}
 
 }

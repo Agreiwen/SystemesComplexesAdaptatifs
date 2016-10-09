@@ -118,11 +118,11 @@ public class Modele extends Observable implements Runnable{
 			for (int j = 0; j < labyrinthe.largeurLabyrinthe(); j++) {
 				switch(labyrinthe.getMap(i, j).getTypeMap()){
 				case MORT :
-					if(labyrinthe.getMap(i, j).nbVoisin() == 3){
+					if(labyrinthe.nbVoisin(i,j) == 3){
 						labyrinthe.getMap(i, j).setTypeMap(TypeMap.VIVANT);
 					}
 				case VIVANT :
-					if(labyrinthe.getMap(i, j).nbVosin() < 2 || labyrinthe.getMap(i, j).nbVoisin() > 3){
+					if(labyrinthe.nbVoisin(i,j) < 2 || labyrinthe.nbVoisin(i,j) > 3){
 						labyrinthe.getMap(i, j).setTypeMap(TypeMap.MORT);
 					}
 				}
