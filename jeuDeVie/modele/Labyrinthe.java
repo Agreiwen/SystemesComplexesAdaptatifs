@@ -146,5 +146,5 @@ public class Labyrinthe {
 		}
 		return nbVoisin;
 	}
-
+	
 }

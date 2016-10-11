@@ -17,6 +17,7 @@ public class Modele extends Observable implements Runnable{
 	protected float temps;
 	protected boolean isInitialise = false;
 	Carte[][] copie;
+	protected int nbCoup = 0;
 	
 	public Modele(){
      	labyrinthe = new Labyrinthe();
@@ -171,12 +172,23 @@ public class Modele extends Observable implements Runnable{
 				getLabyrinthe().getMap(i, j).setTypeMap(copie[i][j].getTypeMap());
 			}
 		}
+		nbCoup++;
 		miseAJour();
+	}
+	
+	public void pasDeTemps(){
+		jeuDeLaVie();
+	}
+	
+	public void complet(){
+		jeuDeLaVie();
+		while(!equals(getLabyrinthe().getJeu(), copie)){
+			jeuDeLaVie();
+		}
 	}
 
 	public int getCoup() {
-		// TODO Auto-generated method stub
-		return 0;
+		return nbCoup;
 	}
 
 	public int getMort() {
@@ -208,4 +220,16 @@ public class Modele extends Observable implements Runnable{
 		getVivant();
 	}
 
+	public boolean equals(Carte[][] courant, Carte[][] copie){
+		boolean res = true;
+		for (int i = 0; i < copie.length; i++) {
+			for (int j = 0; j < copie[0].length; j++) {
+				if(!courant[i][j].getTypeMap().equals(copie[i][j].getTypeMap())){
+					res = false;
+				}
+			}
+		}
+		return res;
+	}
+	
 }
