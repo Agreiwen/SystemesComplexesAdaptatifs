@@ -16,12 +16,13 @@ public class Modele extends Observable implements Runnable{
 	protected boolean run = false;
 	protected float temps;
 	protected boolean isInitialise = false;
-	Carte[][] copie;
+	private Carte[][] copie;
 	protected int nbCoup = 0;
+	private boolean fin = false;
 	
 	public Modele(){
      	labyrinthe = new Labyrinthe();
-     	copie = new Carte[getHauteur()][getLargeur()];
+     	setCopie(new Carte[getHauteur()][getLargeur()]);
 	}
 	
 	public float getTemps() {
@@ -117,9 +118,9 @@ public class Modele extends Observable implements Runnable{
 	}
 	
 	public void initCopie(){
-		for (int i = 0; i < copie.length; i++) {
-			for (int j = 0; j < copie[0].length; j++) {
-				copie[i][j] = new Carte(i, j);
+		for (int i = 0; i < getCopie().length; i++) {
+			for (int j = 0; j < getCopie()[0].length; j++) {
+				getCopie()[i][j] = new Carte(i, j);
 				//System.out.println(test[i][j].toString());
 			}
 		}
@@ -133,10 +134,10 @@ public class Modele extends Observable implements Runnable{
 					//System.out.print(" MORT ");
 					if(labyrinthe.nbVoisin(i,j) == 3){
 						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> VIVANT");
-						copie[i][j].setTypeMap(TypeMap.VIVANT);
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
 					}else{
 						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> MORT");
-						copie[i][j].setTypeMap(TypeMap.MORT);
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
 					}
 				}
 					
@@ -144,10 +145,10 @@ public class Modele extends Observable implements Runnable{
 					//System.out.print(" VIVANT ");
 					if(labyrinthe.nbVoisin(i,j) < 2 || labyrinthe.nbVoisin(i,j) > 3){
 						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> MORT");
-						copie[i][j].setTypeMap(TypeMap.MORT);
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
 					}else{
 						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> VIVANT");
-						copie[i][j].setTypeMap(TypeMap.VIVANT);
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
 					}
 				}
 					
@@ -156,9 +157,9 @@ public class Modele extends Observable implements Runnable{
 	}
 	
 	public void affichageCopie(){
-		for (int i = 0; i < copie.length; i++) {
-			for (int j = 0; j < copie[0].length; j++) {
-				System.out.println(copie[i][j].toString());
+		for (int i = 0; i < getCopie().length; i++) {
+			for (int j = 0; j < getCopie()[0].length; j++) {
+				System.out.println(getCopie()[i][j].toString());
 			}
 		}
 	}
@@ -167,9 +168,14 @@ public class Modele extends Observable implements Runnable{
 		initCopie();
 		ecritureCopie();
 		// Tant que copie est differente de laby.getJeu() Faire...
+		
+		if(equals(getLabyrinthe().getJeu(), getCopie())){
+			setFin(true);
+			nbCoup-=2;
+		}
 		for (int i = 0; i < getHauteur(); i++) {
 			for (int j = 0; j < getLargeur(); j++) {
-				getLabyrinthe().getMap(i, j).setTypeMap(copie[i][j].getTypeMap());
+				getLabyrinthe().getMap(i, j).setTypeMap(getCopie()[i][j].getTypeMap());
 			}
 		}
 		nbCoup++;
@@ -178,13 +184,6 @@ public class Modele extends Observable implements Runnable{
 	
 	public void pasDeTemps(){
 		jeuDeLaVie();
-	}
-	
-	public void complet(){
-		jeuDeLaVie();
-		while(!equals(getLabyrinthe().getJeu(), copie)){
-			jeuDeLaVie();
-		}
 	}
 
 	public int getCoup() {
@@ -230,6 +229,22 @@ public class Modele extends Observable implements Runnable{
 			}
 		}
 		return res;
+	}
+
+	public Carte[][] getCopie() {
+		return copie;
+	}
+
+	public void setCopie(Carte[][] copie) {
+		this.copie = copie;
+	}
+
+	public boolean isFin() {
+		return fin;
+	}
+
+	public void setFin(boolean fin) {
+		this.fin = fin;
 	}
 	
 }
