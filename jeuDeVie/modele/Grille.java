@@ -36,6 +36,17 @@ public class Grille {
 		}
 	}
 	
+	public boolean estVide(){
+		boolean res = true;
+		for (int i = 0; i < jeu.length; i++) {
+			for (int j = 0; j < jeu[0].length; j++) {
+				if(jeu[i][j].getTypeMap() == TypeMap.VIVANT)
+					res = false;
+			}
+		}
+		return res;
+	}
+	
 	public void genereGrilleAleatoire(){
 		int randomI, randomJ;
 		jeu = new Carte[10][10];

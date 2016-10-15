@@ -80,7 +80,6 @@ public class Modele{
 	/* Methodes */
 	
 	public void affichageGrille(){
-		System.out.println("-> Affichage du labyrinthe :\n");
 		for(int i=0; i<grille.hauteurGrille(); i++){
 			for(int j=0; j<grille.largeurGrille(); j++){
 				System.out.print(grille.getMap(i, j).toString());
