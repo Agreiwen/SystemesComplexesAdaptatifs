@@ -52,8 +52,8 @@ public class Modele{
 	
 	public void affichageLabyrinthe(){
 		System.out.println("-> Affichage du labyrinthe :\n");
-		for(int i=0; i<grille.hauteurLabyrinthe(); i++){
-			for(int j=0; j<grille.largeurLabyrinthe(); j++){
+		for(int i=0; i<grille.hauteurGrille(); i++){
+			for(int j=0; j<grille.largeurGrille(); j++){
 				System.out.print(grille.getMap(i, j).toString());
 			}System.out.println();
 		}
@@ -76,8 +76,8 @@ public class Modele{
 	}
 	
 	public void ecritureCopie(){
-		for (int i = 0; i < grille.hauteurLabyrinthe(); i++) {
-			for (int j = 0; j < grille.largeurLabyrinthe(); j++) {
+		for (int i = 0; i < grille.hauteurGrille(); i++) {
+			for (int j = 0; j < grille.largeurGrille(); j++) {
 				if(grille.getMap(i, j).getTypeMap() == TypeMap.MORT){
 					if(grille.nbVoisin(i,j) == 3){
 						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
