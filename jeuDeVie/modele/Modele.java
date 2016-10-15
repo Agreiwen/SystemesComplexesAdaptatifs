@@ -126,6 +126,23 @@ public class Modele extends Observable implements Runnable{
 		}
 	}
 	
+	public void initLaby(){
+		for (int i = 0; i < getCopie().length; i++) {
+			for (int j = 0; j < getCopie()[0].length; j++) {
+				getLabyrinthe().getJeu()[i][j] = new Carte(i, j);
+			}
+		}
+	}
+	
+	public void reinitModele(){
+		initLaby();
+		initCopie();
+		this.run = false;
+		this.isInitialise = false;
+		this.nbCoup = 0;
+		this.temps = 0;
+	}
+	
 	public void ecritureCopie(){
 		for (int i = 0; i < labyrinthe.hauteurLabyrinthe(); i++) {
 			for (int j = 0; j < labyrinthe.largeurLabyrinthe(); j++) {
@@ -167,19 +184,19 @@ public class Modele extends Observable implements Runnable{
 	public void jeuDeLaVie(){
 		initCopie();
 		ecritureCopie();
-		// Tant que copie est differente de laby.getJeu() Faire...
 		
 		if(equals(getLabyrinthe().getJeu(), getCopie())){
 			setFin(true);
-			nbCoup-=2;
+		}else{
+			nbCoup++;
 		}
 		for (int i = 0; i < getHauteur(); i++) {
 			for (int j = 0; j < getLargeur(); j++) {
 				getLabyrinthe().getMap(i, j).setTypeMap(getCopie()[i][j].getTypeMap());
 			}
 		}
-		nbCoup++;
 		miseAJour();
+		//System.out.println(nbCoup);
 	}
 	
 	public void pasDeTemps(){

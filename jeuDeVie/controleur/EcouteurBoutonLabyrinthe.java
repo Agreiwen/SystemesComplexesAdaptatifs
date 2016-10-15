@@ -28,8 +28,8 @@ public class EcouteurBoutonLabyrinthe implements ActionListener {
 			m.getLabyrinthe().getMap(positionX, positionY).setTypeMap(TypeMap.VIVANT);
 		}
 		m.miseAJour();
-		System.out.println(m.getLabyrinthe().getMap(positionX, positionY).toString()+"\n");
-		System.out.println(m.getLabyrinthe().nbVoisin(positionX, positionY));
+		//System.out.println(m.getLabyrinthe().getMap(positionX, positionY).toString()+"\n");
+		//System.out.println(m.getLabyrinthe().nbVoisin(positionX, positionY));
 		//System.out.println(m.getLabyrinthe().getMap(positionX, positionY).valeur());
 		//m.affichageLabyrinthe();
 	}

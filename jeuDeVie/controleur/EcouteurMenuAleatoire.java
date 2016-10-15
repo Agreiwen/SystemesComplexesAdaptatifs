@@ -15,6 +15,7 @@ public class EcouteurMenuAleatoire implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		m.reinitModele();
 		m.getLabyrinthe().genereLabyAleatoire();
 		m.majMortVivant();
 		m.miseAJour();

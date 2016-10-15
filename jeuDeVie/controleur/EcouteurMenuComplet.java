@@ -15,18 +15,10 @@ public class EcouteurMenuComplet implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int nbCoup = 0;
-		Thread t = new Thread((Runnable)m, "Traitement-grille");
-		t.start() ;
 		m.jeuDeLaVie();
-		nbCoup++;
 		while(!m.isFin()){
-			//System.out.println("ok");
 			m.jeuDeLaVie();
-			nbCoup++;
 		}
-		System.out.println(nbCoup-1);
-		t.stop();
 	}
 
 }

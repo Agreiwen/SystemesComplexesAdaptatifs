@@ -37,19 +37,17 @@ public class Labyrinthe {
 	}
 	
 	public void genereLabyAleatoire(){
+		int randomI, randomJ;
 		jeu = new Carte[10][10];
-		int random;
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				jeu[i][j] = new Carte(i, j);
-				random = (int)Math.round(Math.random());
-				if(random == 0){
-					jeu[i][j].setTypeMap(TypeMap.MORT);
-				}else{
-					jeu[i][j].setTypeMap(TypeMap.VIVANT);
-				}
-				
+		for (int i = 0; i < jeu.length; i++) {
+			for (int j = 0; j < jeu[0].length; j++) {
+				jeu[i][j] = new Carte(i,j);
 			}
+		}
+		for (int i = 0; i < 10; i++) {
+			randomI = (int) Math.round(Math.random()*9);
+			randomJ = (int) Math.round(Math.random()*9);
+			jeu[randomI][randomJ].setTypeMap(TypeMap.VIVANT);;
 		}
 	}
 

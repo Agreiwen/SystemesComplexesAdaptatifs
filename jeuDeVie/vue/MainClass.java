@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import jeuDeVie.modele.AlgoGenetique;
 import jeuDeVie.modele.Modele;
 
 @SuppressWarnings("serial")
@@ -11,13 +12,14 @@ public class MainClass extends JFrame{
 
 	public MainClass(){
 		
-		super("Systemes Complexes Adaptatifs - Jeu de vie");
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		/*super("Systemes Complexes Adaptatifs - Jeu de vie");
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
 	    
 	    Modele m = new Modele();
-	    //m.affichageLabyrinthe();
+	    AlgoGenetique ag = new AlgoGenetique(m);
+	    m.affichageLabyrinthe();
 	    
-	    VueGraphique vg = new VueGraphique(m);
+	    /*VueGraphique vg = new VueGraphique(m);
 	    this.add(vg, BorderLayout.NORTH);
 	    
 	    VueBoutons vb = new VueBoutons(m);
@@ -29,7 +31,7 @@ public class MainClass extends JFrame{
         m.miseAJour();
         
         pack() ;
-        setVisible(true);
+        setVisible(true);*/
 	}
 	
 	public static void main(String[] args) {
