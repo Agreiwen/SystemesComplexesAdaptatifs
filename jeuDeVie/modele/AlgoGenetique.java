@@ -40,9 +40,9 @@ public class AlgoGenetique {
 	public void algo(int nbIteration){
 		int maxCoup = 0;
 		int borneSup = 500;
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 10000; i++) {
 			if(i%100000 == 0){
-				System.out.println(i+" "+maxCoup);
+				System.out.println("Iteration "+i+" - "+"maxCoup = "+maxCoup);
 			}
 			//System.out.println(i);
 			//String message = "";

@@ -1,8 +1,10 @@
 package jeuDeVie.modele;
 
+import java.util.Observable;
+
 import jeuDeVie.modele.Carte.TypeMap;
 
-public class Modele{
+public class Modele extends Observable implements Runnable{
 	
 	protected Grille grille;
 	protected int hauteur = 10;
@@ -12,14 +14,40 @@ public class Modele{
 	private Carte[][] copie;
 	protected int nbCoup = 0;
 	protected boolean fin = false;
+	protected float temps;
+	protected boolean run = false;
+	protected boolean isInitialise = false;
 	
 	public Modele(){
      	grille = new Grille();
      	setCopie(new Carte[getHauteur()][getLargeur()]);
 	}
 	
-	
 	/* Getters et setters */
+	
+	public float getTemps() {
+		return temps;
+	}
+
+	public void setTemps(float temps) {
+		this.temps = temps;
+	}
+
+	public boolean isRun() {
+		return run;
+	}
+
+	public void setRun(boolean run) {
+		this.run = run;
+	}
+
+	public boolean isInitialise() {
+		return isInitialise;
+	}
+
+	public void setInitialise(boolean isInitialise) {
+		this.isInitialise = isInitialise;
+	}
 	
 	public void setTypeSelection(TypeSelection typeSelection){
 		this.typeSelection = typeSelection;
@@ -184,6 +212,21 @@ public class Modele{
 			}
 		}
 		return res;
+	}
+
+	@Override
+	public void run() {
+		jeuDeLaVie();
+	}
+	
+	public void miseAJour(){
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void majMortVivant(){
+		getMort();
+		getVivant();
 	}
 
 }

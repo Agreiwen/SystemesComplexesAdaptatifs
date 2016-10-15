@@ -1,6 +1,9 @@
-package jeuDeVie.modele;
+package jeuDeVie.vue;
 
 import javax.swing.JFrame;
+
+import jeuDeVie.modele.AlgoGenetique;
+import jeuDeVie.modele.Modele;
 
 @SuppressWarnings("serial")
 public class MainClass extends JFrame{
