@@ -17,8 +17,8 @@ public class MainClass extends JFrame{
 		
 	    Modele m = new Modele();
 	    AlgoGenetique ag = new AlgoGenetique(m);
-	    //m.affichageGrille();
-	    ag.algo(3);
+	    m.affichageGrille();
+	    ag.algo(1000000);
 	    
 	    /*VueGraphique vg = new VueGraphique(m);
 	    this.add(vg, BorderLayout.NORTH);
@@ -29,10 +29,10 @@ public class MainClass extends JFrame{
         this.add(vb, BorderLayout.CENTER);
         this.setJMenuBar(new VueMenu(m));
 		
-        m.miseAJour();
+        m.miseAJour();*/
         
         pack() ;
-        setVisible(true);*/
+        setVisible(true);
 	}
 	
 	public static void main(String[] args) {

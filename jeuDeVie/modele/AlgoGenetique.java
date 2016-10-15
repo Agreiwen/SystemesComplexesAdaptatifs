@@ -40,10 +40,7 @@ public class AlgoGenetique {
 	public void algo(int nbIteration){
 		int maxCoup = 0;
 		int borneSup = 500;
-		for (int i = 0; i < 3000000; i++) {
-			if(i%100000 == 0){
-				System.out.println("Iteration "+i+" - "+"maxCoup = "+maxCoup);
-			}
+		for (int i = 0; i < nbIteration; i++) {
 			//System.out.println(i);
 			//String message = "";
 			m = new Modele();
@@ -66,9 +63,13 @@ public class AlgoGenetique {
 			//message += Integer.toString(m.getCoup());
 			//message += "\n";
 			//System.out.println(message);
+			if(i%100000 == 0){
+				System.out.println("Iteration "+i+" - "+"maxCoup = "+maxCoup);
+			}
 		}
+		System.out.println();
 		afficherSolution();
-		//System.out.println("\n"+maxCoup);
+		System.out.println("\n"+maxCoup);
 	}
 
 }

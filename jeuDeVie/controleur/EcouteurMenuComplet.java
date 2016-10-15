@@ -16,8 +16,10 @@ public class EcouteurMenuComplet implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		m.jeuDeLaVie();
+		//m.miseAJour();
 		while(!m.isFin()){
 			m.jeuDeLaVie();
+			m.miseAJour();
 		}
 	}
 

@@ -161,21 +161,19 @@ public class Modele extends Observable implements Runnable{
 	}
 	
 	public void jeuDeLaVie(){
-		
-			initCopie();
-			ecritureCopie();
+		initCopie();
+		ecritureCopie();
 			
-			if(equals(getGrille().getJeu(), getCopie())){
-				setFin(true);
-			}else{
-				nbCoup++;
+		if(equals(getGrille().getJeu(), getCopie())){
+			setFin(true);
+		}else{
+			nbCoup++;
+		}
+		for (int i = 0; i < getHauteur(); i++) {
+			for (int j = 0; j < getLargeur(); j++) {
+				getGrille().getMap(i, j).setTypeMap(getCopie()[i][j].getTypeMap());
 			}
-			for (int i = 0; i < getHauteur(); i++) {
-				for (int j = 0; j < getLargeur(); j++) {
-					getGrille().getMap(i, j).setTypeMap(getCopie()[i][j].getTypeMap());
-				}
-			}
-
+		}
 	}
 	
 	public int getMort() {
@@ -214,11 +212,6 @@ public class Modele extends Observable implements Runnable{
 		return res;
 	}
 
-	@Override
-	public void run() {
-		jeuDeLaVie();
-	}
-	
 	public void miseAJour(){
 		setChanged();
 		notifyObservers();
@@ -227,6 +220,11 @@ public class Modele extends Observable implements Runnable{
 	public void majMortVivant(){
 		getMort();
 		getVivant();
+	}
+	
+	@Override
+	public void run() {
+		jeuDeLaVie();
 	}
 
 }

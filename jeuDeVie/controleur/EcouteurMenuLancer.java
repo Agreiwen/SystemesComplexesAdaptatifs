@@ -16,7 +16,8 @@ public class EcouteurMenuLancer implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Thread t = new Thread((Runnable)m, "Traitement-grille");
-		t.start() ;
+		t.start();
+		m.miseAJour();
 	}
 
 }
