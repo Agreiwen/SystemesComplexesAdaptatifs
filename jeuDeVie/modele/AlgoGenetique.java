@@ -10,6 +10,10 @@ public class AlgoGenetique {
 	
 	public Carte[][] algo(int nbIteration){
 		Carte[][] solution = new Carte[m.hauteur][m.largeur];
+		m.jeuDeLaVie();
+		while(!m.isFin()){
+			m.jeuDeLaVie();
+		}
 		return solution;
 		
 	}

@@ -1,63 +1,23 @@
 package jeuDeVie.modele;
 
-import java.util.Observable;
-
 import jeuDeVie.modele.Carte.TypeMap;
 
-public class Modele extends Observable implements Runnable{
+public class Modele{
 	
-	protected Labyrinthe labyrinthe;
+	protected Grille grille;
 	protected int hauteur = 10;
 	protected int largeur = 10;
 	public enum TypeSelection {VIVANT, MORT}
 	protected TypeSelection typeSelection;
-	protected long TempsDepart;
-	protected long TempsArrivee;
-	protected boolean run = false;
-	protected float temps;
-	protected boolean isInitialise = false;
 	private Carte[][] copie;
 	protected int nbCoup = 0;
-	private boolean fin = false;
+	protected boolean fin = false;
 	
 	public Modele(){
-     	labyrinthe = new Labyrinthe();
+     	grille = new Grille();
      	setCopie(new Carte[getHauteur()][getLargeur()]);
 	}
 	
-	public float getTemps() {
-		return temps;
-	}
-
-	public void setTemps(float temps) {
-		this.temps = temps;
-		this.miseAJour();
-	}
-
-	public boolean isRun() {
-		return run;
-	}
-
-	public void setRun(boolean run) {
-		this.run = run;
-	}
-
-	public long getTempsDepart() {
-		return TempsDepart;
-	}
-
-	public void setTempsDepart(long tempsDepart) {
-		TempsDepart = tempsDepart;
-	}
-
-	public long getTempsArrivee() {
-		return TempsArrivee;
-	}
-
-	public void setTempsArrivee(long tempsArrivee) {
-		TempsArrivee = tempsArrivee;
-	}
-
 	public void setTypeSelection(TypeSelection typeSelection){
 		this.typeSelection = typeSelection;
 	}
@@ -66,12 +26,12 @@ public class Modele extends Observable implements Runnable{
 		return typeSelection;
 	}
 	
-	public Labyrinthe getLabyrinthe() {
-		return labyrinthe;
+	public Grille getLabyrinthe() {
+		return grille;
 	}
 
-	public void setLabyrinthe(Labyrinthe labyrinthe) {
-		this.labyrinthe = labyrinthe;
+	public void setLabyrinthe(Grille labyrinthe) {
+		this.grille = labyrinthe;
 	}
 	
 	public int getHauteur() {
@@ -89,39 +49,20 @@ public class Modele extends Observable implements Runnable{
 	public void setLargeur(int largeur) {
 		this.largeur = largeur;
 	}
-
-	public void miseAJour(){
-		setChanged();
-		notifyObservers();
-	}
-	
-	@Override
-	public void run() {
-		jeuDeLaVie();
-	}
 	
 	public void affichageLabyrinthe(){
 		System.out.println("-> Affichage du labyrinthe :\n");
-		for(int i=0; i<labyrinthe.hauteurLabyrinthe(); i++){
-			for(int j=0; j<labyrinthe.largeurLabyrinthe(); j++){
-				System.out.print(labyrinthe.getMap(i, j).toString());
+		for(int i=0; i<grille.hauteurLabyrinthe(); i++){
+			for(int j=0; j<grille.largeurLabyrinthe(); j++){
+				System.out.print(grille.getMap(i, j).toString());
 			}System.out.println();
 		}
-	}
-
-	public boolean isInitialise() {
-		return isInitialise;
-	}
-
-	public void setInitialise(boolean b) {
-		this.isInitialise = b;
 	}
 	
 	public void initCopie(){
 		for (int i = 0; i < getCopie().length; i++) {
 			for (int j = 0; j < getCopie()[0].length; j++) {
 				getCopie()[i][j] = new Carte(i, j);
-				//System.out.println(test[i][j].toString());
 			}
 		}
 	}
@@ -134,41 +75,23 @@ public class Modele extends Observable implements Runnable{
 		}
 	}
 	
-	public void reinitModele(){
-		initLaby();
-		initCopie();
-		this.run = false;
-		this.isInitialise = false;
-		this.nbCoup = 0;
-		this.temps = 0;
-	}
-	
 	public void ecritureCopie(){
-		for (int i = 0; i < labyrinthe.hauteurLabyrinthe(); i++) {
-			for (int j = 0; j < labyrinthe.largeurLabyrinthe(); j++) {
-				//System.out.print("("+i+","+j+") :");
-				if(labyrinthe.getMap(i, j).getTypeMap() == TypeMap.MORT){
-					//System.out.print(" MORT ");
-					if(labyrinthe.nbVoisin(i,j) == 3){
-						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> VIVANT");
+		for (int i = 0; i < grille.hauteurLabyrinthe(); i++) {
+			for (int j = 0; j < grille.largeurLabyrinthe(); j++) {
+				if(grille.getMap(i, j).getTypeMap() == TypeMap.MORT){
+					if(grille.nbVoisin(i,j) == 3){
 						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
 					}else{
-						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> MORT");
 						getCopie()[i][j].setTypeMap(TypeMap.MORT);
 					}
 				}
-					
 				else{
-					//System.out.print(" VIVANT ");
-					if(labyrinthe.nbVoisin(i,j) < 2 || labyrinthe.nbVoisin(i,j) > 3){
-						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> MORT");
+					if(grille.nbVoisin(i,j) < 2 || grille.nbVoisin(i,j) > 3){
 						getCopie()[i][j].setTypeMap(TypeMap.MORT);
 					}else{
-						//System.out.println(getLabyrinthe().getMap(i, j).getTypeMap()+" -> VIVANT");
 						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
 					}
 				}
-					
 			}
 		}
 	}
@@ -195,8 +118,6 @@ public class Modele extends Observable implements Runnable{
 				getLabyrinthe().getMap(i, j).setTypeMap(getCopie()[i][j].getTypeMap());
 			}
 		}
-		miseAJour();
-		//System.out.println(nbCoup);
 	}
 	
 	public void pasDeTemps(){

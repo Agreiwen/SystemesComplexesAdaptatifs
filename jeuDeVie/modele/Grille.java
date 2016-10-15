@@ -2,11 +2,11 @@ package jeuDeVie.modele;
 
 import jeuDeVie.modele.Carte.TypeMap;
 
-public class Labyrinthe {
+public class Grille {
 	
 	private Carte[][] jeu;
 	
-	public Labyrinthe(){
+	public Grille(){
 		creationLaby();
 	}
 
