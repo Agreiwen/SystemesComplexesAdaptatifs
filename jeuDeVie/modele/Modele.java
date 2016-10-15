@@ -18,6 +18,9 @@ public class Modele{
      	setCopie(new Carte[getHauteur()][getLargeur()]);
 	}
 	
+	
+	/* Getters et setters */
+	
 	public void setTypeSelection(TypeSelection typeSelection){
 		this.typeSelection = typeSelection;
 	}
@@ -26,12 +29,12 @@ public class Modele{
 		return typeSelection;
 	}
 	
-	public Grille getLabyrinthe() {
+	public Grille getGrille() {
 		return grille;
 	}
 
-	public void setLabyrinthe(Grille labyrinthe) {
-		this.grille = labyrinthe;
+	public void setGrille(Grille grille) {
+		this.grille = grille;
 	}
 	
 	public int getHauteur() {
@@ -50,7 +53,33 @@ public class Modele{
 		this.largeur = largeur;
 	}
 	
-	public void affichageLabyrinthe(){
+	public int getCoup() {
+		return nbCoup;
+	}
+	
+	public void setCoup(int coup){
+		this.nbCoup = coup;
+	}
+	
+	public Carte[][] getCopie() {
+		return copie;
+	}
+
+	public void setCopie(Carte[][] copie) {
+		this.copie = copie;
+	}
+
+	public boolean isFin() {
+		return fin;
+	}
+
+	public void setFin(boolean fin) {
+		this.fin = fin;
+	}
+	
+	/* Methodes */
+	
+	public void affichageGrille(){
 		System.out.println("-> Affichage du labyrinthe :\n");
 		for(int i=0; i<grille.hauteurGrille(); i++){
 			for(int j=0; j<grille.largeurGrille(); j++){
@@ -67,10 +96,10 @@ public class Modele{
 		}
 	}
 	
-	public void initLaby(){
+	public void initGrille(){
 		for (int i = 0; i < getCopie().length; i++) {
 			for (int j = 0; j < getCopie()[0].length; j++) {
-				getLabyrinthe().getJeu()[i][j] = new Carte(i, j);
+				getGrille().getJeu()[i][j] = new Carte(i, j);
 			}
 		}
 	}
@@ -105,34 +134,28 @@ public class Modele{
 	}
 	
 	public void jeuDeLaVie(){
-		initCopie();
-		ecritureCopie();
 		
-		if(equals(getLabyrinthe().getJeu(), getCopie())){
-			setFin(true);
-		}else{
-			nbCoup++;
-		}
-		for (int i = 0; i < getHauteur(); i++) {
-			for (int j = 0; j < getLargeur(); j++) {
-				getLabyrinthe().getMap(i, j).setTypeMap(getCopie()[i][j].getTypeMap());
+			initCopie();
+			ecritureCopie();
+			
+			if(equals(getGrille().getJeu(), getCopie())){
+				setFin(true);
+			}else{
+				nbCoup++;
 			}
-		}
+			for (int i = 0; i < getHauteur(); i++) {
+				for (int j = 0; j < getLargeur(); j++) {
+					getGrille().getMap(i, j).setTypeMap(getCopie()[i][j].getTypeMap());
+				}
+			}
+
 	}
 	
-	public void pasDeTemps(){
-		jeuDeLaVie();
-	}
-
-	public int getCoup() {
-		return nbCoup;
-	}
-
 	public int getMort() {
 		int mort = 0;
 		for (int i = 0; i < getHauteur(); i++) {
 			for (int j = 0; j < getLargeur(); j++) {
-				if(getLabyrinthe().getMap(i, j).getTypeMap() ==  TypeMap.MORT){
+				if(getGrille().getMap(i, j).getTypeMap() ==  TypeMap.MORT){
 					mort++;
 				}
 			}
@@ -144,17 +167,12 @@ public class Modele{
 		int vivant = 0;
 		for (int i = 0; i < getHauteur(); i++) {
 			for (int j = 0; j < getLargeur(); j++) {
-				if(getLabyrinthe().getMap(i, j).getTypeMap() ==  TypeMap.VIVANT){
+				if(getGrille().getMap(i, j).getTypeMap() ==  TypeMap.VIVANT){
 					vivant++;
 				}
 			}
 		}
 		return vivant;
-	}
-	
-	public void majMortVivant(){
-		getMort();
-		getVivant();
 	}
 
 	public boolean equals(Carte[][] courant, Carte[][] copie){
@@ -169,20 +187,4 @@ public class Modele{
 		return res;
 	}
 
-	public Carte[][] getCopie() {
-		return copie;
-	}
-
-	public void setCopie(Carte[][] copie) {
-		this.copie = copie;
-	}
-
-	public boolean isFin() {
-		return fin;
-	}
-
-	public void setFin(boolean fin) {
-		this.fin = fin;
-	}
-	
 }

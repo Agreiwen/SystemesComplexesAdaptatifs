@@ -8,7 +8,8 @@ public class MainClass extends JFrame{
 	public MainClass(){
 	    Modele m = new Modele();
 	    AlgoGenetique ag = new AlgoGenetique(m);
-	    m.affichageLabyrinthe();
+	    //m.affichageGrille();
+	    ag.algo(3);
 	}
 	
 	public static void main(String[] args) {
