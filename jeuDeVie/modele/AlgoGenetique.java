@@ -63,7 +63,7 @@ public class AlgoGenetique {
 			//message += Integer.toString(m.getCoup());
 			//message += "\n";
 			//System.out.println(message);
-			if(i%100000 == 0){
+			if(i%100000 == 0 && i!=0){
 				System.out.println("Iteration "+i+" - "+"maxCoup = "+maxCoup);
 			}
 		}

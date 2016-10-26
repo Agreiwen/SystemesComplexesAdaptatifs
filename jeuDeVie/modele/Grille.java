@@ -48,6 +48,8 @@ public class Grille {
 	}
 	
 	public void genereGrilleAleatoire(){
+		int mini = 2;
+		int max = 7;
 		int randomI, randomJ;
 		jeu = new Carte[10][10];
 		for (int i = 0; i < jeu.length; i++) {
@@ -56,8 +58,8 @@ public class Grille {
 			}
 		}
 		for (int i = 0; i < 10; i++) {
-			randomI = (int) Math.round(Math.random()*9);
-			randomJ = (int) Math.round(Math.random()*9);
+			randomI = (int) Math.round((int)( Math.random()*( max - mini + 1 ) ) + mini);
+			randomJ = (int) Math.round((int)( Math.random()*( max - mini + 1 ) ) + mini);
 			jeu[randomI][randomJ].setTypeMap(TypeMap.VIVANT);;
 		}
 	}
