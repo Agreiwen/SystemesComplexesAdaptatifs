@@ -7,8 +7,8 @@ import jeuDeVie.modele.Carte.TypeMap;
 public class Modele extends Observable implements Runnable{
 	
 	protected Grille grille;
-	protected int hauteur = 10;
-	protected int largeur = 10;
+	protected int hauteur = 40;
+	protected int largeur = 40;
 	public enum TypeSelection {VIVANT, MORT}
 	protected TypeSelection typeSelection;
 	private Carte[][] copie;
@@ -19,7 +19,7 @@ public class Modele extends Observable implements Runnable{
 	protected boolean isInitialise = false;
 	
 	public Modele(){
-     	grille = new Grille();
+     	grille = new Grille(largeur, hauteur);
      	setCopie(new Carte[getHauteur()][getLargeur()]);
 	}
 	

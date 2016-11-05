@@ -5,9 +5,12 @@ import jeuDeVie.modele.Carte.TypeMap;
 public class Grille {
 	
 	private Carte[][] jeu;
-	
-	public Grille(){
+	private int taillelargeur;
+	private int taillehauteur;
+	public Grille(int l, int h){
 		creationGrille();
+		this.taillehauteur = 40;
+		this.taillelargeur = 40;
 	}
 
 	public int hauteurGrille() {
@@ -27,9 +30,9 @@ public class Grille {
 	}
 	
 	public void creationGrille(){
-		jeu = new Carte[10][10];
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
+		jeu = new Carte[this.taillehauteur][this.taillelargeur];
+		for (int i = 0; i < jeu.length; i++) {
+			for (int j = 0; j < jeu[0].length; j++) {
 				jeu[i][j] = new Carte(i, j);
 				jeu[i][j].setTypeMap(TypeMap.MORT);
 			}
@@ -49,15 +52,15 @@ public class Grille {
 	
 	public void genereGrilleAleatoire(){
 		int mini = 2;
-		int max = 7;
+		int max = 37;
 		int randomI, randomJ;
-		jeu = new Carte[10][10];
+		jeu = new Carte[this.taillehauteur][this.taillelargeur];
 		for (int i = 0; i < jeu.length; i++) {
 			for (int j = 0; j < jeu[0].length; j++) {
 				jeu[i][j] = new Carte(i,j);
 			}
 		}
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < this.taillehauteur; i++) {
 			randomI = (int) Math.round((int)( Math.random()*( max - mini + 1 ) ) + mini);
 			randomJ = (int) Math.round((int)( Math.random()*( max - mini + 1 ) ) + mini);
 			jeu[randomI][randomJ].setTypeMap(TypeMap.VIVANT);;
@@ -67,7 +70,7 @@ public class Grille {
 	public int nbVoisin(int i, int j) {
 		int nbVoisin = 0;
 		// Gros rectangle
-		if(i >= 1 && i <= 8 && j >= 1 && j<=8){
+		if(i >= 1 && i <= this.taillelargeur-2 && j >= 1 && j<=this.taillelargeur-2){
 			for(int x = i-1; x <= i+1; x++){
 				for (int y = j-1; y <= j+1; y++) {
 					if(x!=i || y!=j){
@@ -77,7 +80,7 @@ public class Grille {
 			}
 		}
 		//Ligne du haut
-		else if(i == 0 && j >=1 && j <= 8){
+		else if(i == 0 && j >=1 && j <= this.taillelargeur-2){
 			for (int x = i; x <= i+1; x++) {
 				for (int y = j-1 ; y <= j+1; y++) {
 					if(x!=i || y!=j){
@@ -86,11 +89,11 @@ public class Grille {
 				}
 			}
 			for (int y = j-1; y <= j+1; y++) {
-				nbVoisin += getMap(9, y).valeur();
+				nbVoisin += getMap(this.taillelargeur-1, y).valeur();
 			}
 		}
 		//Ligne du bas
-		else if(i == 9 && j >=1 && j <= 8){
+		else if(i == this.taillelargeur-1 && j >=1 && j <= this.taillelargeur-2){
 			for (int x = i-1; x <= i; x++) {
 				for (int y = j-1 ; y <= j+1; y++) {
 					if(x!=i || y!=j){
@@ -103,7 +106,7 @@ public class Grille {
 			}
 		}
 		//Ligne de gauche
-		else if(j == 0 && i >=1 && i <= 8){
+		else if(j == 0 && i >=1 && i <= this.taillelargeur-2){
 			for (int x = i-1; x <= i+1; x++) {
 				for (int y = j ; y <= j+1; y++) {
 					if(x!=i || y!=j){
@@ -112,11 +115,11 @@ public class Grille {
 				}
 			}
 			for (int x = i-1; x <= i+1; x++) {
-				nbVoisin += getMap(x, 9).valeur();
+				nbVoisin += getMap(x, this.taillelargeur-1).valeur();
 			}
 		}
 		//Ligne de droite
-		else if(j == 9 && i >=1 && i <= 8){
+		else if(j == this.taillelargeur-1 && i >=1 && i <= this.taillelargeur-2){
 			for (int x = i-1; x <= i+1; x++) {
 				for (int y = j-1 ; y <= j; y++) {
 					if(x!=i || y!=j){
@@ -130,19 +133,19 @@ public class Grille {
 		}
 		//Haut Gauche
 		else if(i == 0 && j == 0){
-			nbVoisin = getMap(0, 1).valeur() + getMap(1, 0).valeur() + getMap(1, 1).valeur() + getMap(0, 9).valeur() + getMap(1, 9).valeur() + getMap(9, 0).valeur() + getMap(9, 1).valeur() + getMap(9, 9).valeur(); 
+			nbVoisin = getMap(0, 1).valeur() + getMap(1, 0).valeur() + getMap(1, 1).valeur() + getMap(0, this.taillelargeur-1).valeur() + getMap(1, this.taillelargeur-1).valeur() + getMap(this.taillelargeur-1, 0).valeur() + getMap(this.taillelargeur-1, 1).valeur() + getMap(this.taillelargeur-1, this.taillelargeur-1).valeur(); 
 		}
 		//Haut Droite
-		else if(i == 0 && j == 9){
-			nbVoisin = getMap(0, 8).valeur() + getMap(1, 8).valeur() + getMap(1, 9).valeur() +  getMap(0, 0).valeur() + getMap(1, 0).valeur() + getMap(9, 8).valeur() + getMap(9, 9).valeur() + getMap(9, 0).valeur(); 
+		else if(i == 0 && j == this.taillelargeur-1){
+			nbVoisin = getMap(0, this.taillelargeur-2).valeur() + getMap(1, this.taillelargeur-2).valeur() + getMap(1, this.taillelargeur-1).valeur() +  getMap(0, 0).valeur() + getMap(1, 0).valeur() + getMap(this.taillelargeur-1, this.taillelargeur-2).valeur() + getMap(this.taillelargeur-1, this.taillelargeur-1).valeur() + getMap(this.taillelargeur-1, 0).valeur(); 
 		}
 		//Bas Gauche
-		else if(i == 9 && j == 0){
-			nbVoisin = getMap(8, 0).valeur() + getMap(8, 1).valeur() + getMap(9, 1).valeur() + getMap(0, 0).valeur() + getMap(0, 1).valeur() + getMap(8, 9).valeur() + getMap(9, 9).valeur() + getMap(0, 9).valeur();
+		else if(i == this.taillelargeur-1 && j == 0){
+			nbVoisin = getMap(this.taillelargeur-2, 0).valeur() + getMap(this.taillelargeur-2, 1).valeur() + getMap(this.taillelargeur-1, 1).valeur() + getMap(0, 0).valeur() + getMap(0, 1).valeur() + getMap(this.taillelargeur-2, this.taillelargeur-1).valeur() + getMap(this.taillelargeur-1, this.taillelargeur-1).valeur() + getMap(0, this.taillelargeur-1).valeur();
 		}
 		// Bas Droite
-		else if(i == 9 && j == 9){
-			nbVoisin = getMap(8, 8).valeur() + getMap(8, 9).valeur() + getMap(9, 8).valeur() + getMap(0, 8).valeur() + getMap(0, 9).valeur() + getMap(8, 0).valeur() + getMap(9, 0).valeur() + getMap(0, 0).valeur();
+		else if(i == this.taillelargeur-1 && j == this.taillelargeur-1){
+			nbVoisin = getMap(this.taillelargeur-2, this.taillelargeur-2).valeur() + getMap(this.taillelargeur-2, this.taillelargeur-1).valeur() + getMap(this.taillelargeur-1, this.taillelargeur-2).valeur() + getMap(0, this.taillelargeur-2).valeur() + getMap(0, this.taillelargeur-1).valeur() + getMap(this.taillelargeur-2, 0).valeur() + getMap(this.taillelargeur-1, 0).valeur() + getMap(0, 0).valeur();
 		}
 		return nbVoisin;
 	}
