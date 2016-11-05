@@ -152,6 +152,73 @@ public class Modele extends Observable implements Runnable{
 		}
 	}
 	
+	
+	public void ecritureCopieMajoritaire(){
+		for (int i = 0; i < grille.hauteurGrille(); i++) {
+			for (int j = 0; j < grille.largeurGrille(); j++) {
+				if(grille.getMap(i, j).getTypeMap() == TypeMap.VIVANT){
+					if(grille.vivantMajoritaire(i,j)){
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
+					}else{
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
+					}
+				}else{
+					if(grille.mortMajoritaire(i,j)){
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
+					}else{
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
+					}
+				}
+			}
+		}
+	}
+	
+	
+	public void ecritureCopieParite(){
+		for (int i = 0; i < grille.hauteurGrille(); i++) {
+			for (int j = 0; j < grille.largeurGrille(); j++) {
+				if(grille.getMap(i, j).getTypeMap() == TypeMap.MORT){
+					if(grille.pair(i, j)){
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
+					}else{
+						//System.out.println(i+" "+j+" "+grille.nbVoisin(i, j));
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
+					}
+				}
+				else{
+					if(grille.pair(i, j)){
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
+					}else{
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	public void ecritureCopieInverse(){
+		for (int i = 0; i < grille.hauteurGrille(); i++) {
+			for (int j = 0; j < grille.largeurGrille(); j++) {
+				if(grille.getMap(i, j).getTypeMap() == TypeMap.VIVANT){
+					if(grille.nbVoisin(i,j) != 3){
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
+					}else{
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
+					}
+				}
+				else{
+					if(grille.nbVoisin(i,j) < 2 || grille.nbVoisin(i,j) > 3){
+						getCopie()[i][j].setTypeMap(TypeMap.MORT);
+					}else{
+						getCopie()[i][j].setTypeMap(TypeMap.VIVANT);
+					}
+				}
+			}
+		}
+	}
+	
 	public void affichageCopie(){
 		for (int i = 0; i < getCopie().length; i++) {
 			for (int j = 0; j < getCopie()[0].length; j++) {
@@ -162,7 +229,14 @@ public class Modele extends Observable implements Runnable{
 	
 	public void jeuDeLaVie(){
 		initCopie();
-		ecritureCopie();
+		
+		/***************************************************************************/
+		/** Trois choix possibles : mode jeu de la vie ou mode majorité ou inverse**/
+		/***************************************************************************/
+		//ecritureCopie(); //jeu de la vie
+		//ecritureCopieMajoritaire(); //majorité
+		ecritureCopieParite(); //parité;
+		//ecritureCopieInverse();
 			
 		if(equals(getGrille().getJeu(), getCopie())){
 			setFin(true);
