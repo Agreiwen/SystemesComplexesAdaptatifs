@@ -170,8 +170,11 @@ public class MainIntelligent {
 			if(nbCoup < BORNE_SUP && nbCoup > maxCoup){
 				recopieDansSolution();
 				maxCoup = nbCoup;
+				System.out.print("Iteration "+i+" - "+"maxCoup = "+maxCoup+" - ");
+				affTab(tabSolution);
+				System.out.println();
 			}
-			if((i % 100) == 0)
+			if((i % 100000) == 0)
 				System.out.println("Iteration "+i+" - "+"maxCoup = "+maxCoup);
 		}
 		System.out.println();
@@ -180,10 +183,10 @@ public class MainIntelligent {
 	
 	public static void main(String[] args) {
 		//int largeur = (int)((Math.random()*32)+1)*3;
-		int largeur = 21;
+		int largeur = 15;
 		String nomFichier = "resultat.txt";
 		MainIntelligent m = new MainIntelligent(largeur,nomFichier);
-		int iteration = 1000000;
+		int iteration = 3000000;
 		m.algoGenetique(iteration);
 		//m.ecrire(NOM_FICHIER, LARGEUR+"\n");
 	}
