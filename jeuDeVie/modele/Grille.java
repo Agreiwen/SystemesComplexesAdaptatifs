@@ -150,43 +150,4 @@ public class Grille {
 		return nbVoisin;
 	}
 	
-	
-	public boolean vivantMajoritaire(int i, int j){
-		return (nbVoisin(i,j)>=4);
-	}
-	
-	public boolean mortMajoritaire(int i, int j){
-		return (nbVoisin(i,j)<=4);
-	}
-	
-	public boolean pair(int i, int j){
-		return  ((nbVoisin(i, j) %2)== 0);
-		/*switch(nbVoisin(i, j)){
-		case 0:
-			return false;
-		case 1:
-			return false;
-		case 2:
-			return true;
-		case 3:
-			return false;
-		case 4:
-			return true;
-		case 5:
-			return false;
-		case 6:
-			return true;
-		case 7:
-			return false;
-		case 8:
-			return true;
-		case 9:
-			return false;
-		case 10:
-			return true;
-		default:
-			return false;
-		}*/
-	}
-	
 }
