@@ -24,7 +24,7 @@ public class Modele extends Observable implements Runnable{
 	public Modele(int i, int largeur){
      	this.largeur = largeur;
      	r = new Regle(i);
-     	grille = new Grille(r, largeur);
+     	grille = new Grille(r, largeur-1);
      	//System.out.println(getLargeur());
      	setCopie(new Carte[getLargeur()]);
 	}
