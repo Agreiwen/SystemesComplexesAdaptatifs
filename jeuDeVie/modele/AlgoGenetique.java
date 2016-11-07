@@ -8,8 +8,8 @@ public class AlgoGenetique {
 
 	public AlgoGenetique(Modele m) {
 		this.m = m;
-		solution = new Grille(m.getHauteur(), m.getLargeur());
-		copie = new Grille(m.getHauteur(), m.getLargeur());
+		solution = new Grille();
+		copie = new Grille();
 	}
 	
 	public void recopieDansCopie(Carte[][] grille){

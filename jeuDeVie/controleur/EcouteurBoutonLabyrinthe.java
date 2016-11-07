@@ -23,7 +23,7 @@ public class EcouteurBoutonLabyrinthe implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(m.getTypeSelection() == TypeSelection.MORT){
 			m.getGrille().getMap(positionX, positionY).setTypeMap(TypeMap.MORT);
-		//	m.miseAJour();
+			m.miseAJour();
 		}else if(m.getTypeSelection() == TypeSelection.VIVANT){
 			m.getGrille().getMap(positionX, positionY).setTypeMap(TypeMap.VIVANT);
 		}
