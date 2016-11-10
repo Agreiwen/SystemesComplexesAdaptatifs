@@ -8,7 +8,7 @@ public class MainIntelligent {
 	
 	public static int LARGEUR;
 	public static String NOM_FICHIER;
-	public static int BORNE_SUP = 500;
+	public static int BORNE_SUP = 100;
 	public int[] tabCourant;
 	public int[] tabCopie;
 	public int[] tabSolution;
@@ -183,7 +183,7 @@ public class MainIntelligent {
 	
 	public static void main(String[] args) {
 		//int largeur = (int)((Math.random()*32)+1)*3;
-		int largeur = 15;
+		int largeur = 27;
 		String nomFichier = "resultat.txt";
 		MainIntelligent m = new MainIntelligent(largeur,nomFichier);
 		int iteration = 3000000;
