@@ -1,6 +1,5 @@
 package jeuDeLaVie.vue;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
@@ -28,7 +27,6 @@ public class VueGrille extends JPanel implements Observer{
 		super();
 		this.m = m;
 		m.addObserver(this);
-		this.setPreferredSize(new Dimension(600,600));
 	}
 
 	@Override
@@ -44,6 +42,9 @@ public class VueGrille extends JPanel implements Observer{
 					tabButton[i][j].addActionListener(new EcouteurBoutonGrille(m, i, j));
 					tabButton[i][j].setContentAreaFilled(false);
             		tabButton[i][j].setFocusPainted(false);
+            		if(m.getDimension() == 1 && i > 0){
+						 tabButton[i][j].setEnabled(false); 
+					}
 				}
 			}
             m.setInitialise(true);

@@ -27,8 +27,8 @@ public class Grille {
 	public void creationGrille(int largeur, int longueur){
 		System.out.println("grille");
 		jeu = new int[largeur][longueur];
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < largeur; i++) {
+			for (int j = 0; j < longueur; j++) {
 				jeu[i][j] = 0;
 			}
 		}

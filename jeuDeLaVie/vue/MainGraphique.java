@@ -3,11 +3,13 @@ package jeuDeLaVie.vue;
 import jeuDeLaVie.modele.Modele;
 
 public class MainGraphique {
-
+	
+	protected VueParametrage vp;
+	
 	public MainGraphique(){
 		
 	    Modele m = new Modele();
-	    VueParametrage vg = new VueParametrage(m);
+	    vp = new VueParametrage(m);
 
 	}
 	

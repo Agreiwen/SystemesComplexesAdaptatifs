@@ -1,7 +1,9 @@
 package jeuDeLaVie.vue;
 
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,8 +18,8 @@ import jeuDeLaVie.controleur.EcouteurDeuxDimension;
 import jeuDeLaVie.controleur.EcouteurMoore8;
 import jeuDeLaVie.controleur.EcouteurMoore9;
 import jeuDeLaVie.controleur.EcouteurOk;
-import jeuDeLaVie.controleur.EcouteurTexteFieldLongueur;
 import jeuDeLaVie.controleur.EcouteurTexteFieldLargeur;
+import jeuDeLaVie.controleur.EcouteurTexteFieldLongueur;
 import jeuDeLaVie.controleur.EcouteurUneDimension;
 import jeuDeLaVie.modele.Modele;
 
@@ -42,12 +44,18 @@ public class VueParametrage extends JFrame implements Observer{
 	protected JCheckBox jCheckBoxMoore9;
 	protected JButton jBouttonOk;
 
+	private static final int LONGUEUR_PARAMETRAGE = 350;
+	private static final int LARGEUR_PARAMETRAGE = 170;
+	
 	public VueParametrage(Modele m) {
 		super("Parametre automate cellulaire");
 		this.m = m;
 		m.addObserver(this);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setPreferredSize(new Dimension(350, 170));
+	    this.setPreferredSize(new Dimension(LONGUEUR_PARAMETRAGE, LARGEUR_PARAMETRAGE));
+	    Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+	    System.out.println(bounds.getMinY()+" "+bounds.getMinX());
+	    this.setLocation((int)(bounds.getMaxX()/2-LONGUEUR_PARAMETRAGE-((bounds.getMaxY()*5)/100)),(int)(bounds.getMaxY()/2-LARGEUR_PARAMETRAGE-((bounds.getMaxY()*5)/100)));
 	    GridLayout ensemble = new GridLayout(4, 1);
 	    this.setLayout(ensemble);
 	    

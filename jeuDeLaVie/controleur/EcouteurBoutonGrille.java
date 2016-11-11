@@ -21,8 +21,9 @@ public class EcouteurBoutonGrille implements ActionListener {
 		if(m.getCellule(positionI, positionJ) == 0){
 			m.setCellule(positionI, positionJ, 1);
 		}else if(m.getCellule(positionI, positionJ) == 1){
-			m.setCellule(positionI, positionJ, 1);
+			m.setCellule(positionI, positionJ, 0);
 		}
+		m.miseAJour();
 	}
 
 }
