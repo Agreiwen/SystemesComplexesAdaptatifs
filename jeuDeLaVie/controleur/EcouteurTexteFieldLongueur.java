@@ -22,6 +22,7 @@ public class EcouteurTexteFieldLongueur implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_ENTER){
 			try {
 				m.setLongueur(Integer.parseInt(jTextFieldLongueur.getText()));
+				m.miseAJour();
 			} catch (NumberFormatException e1) {
 				System.out.println("caca");
 			}

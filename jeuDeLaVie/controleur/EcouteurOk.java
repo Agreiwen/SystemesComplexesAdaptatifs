@@ -7,14 +7,12 @@ import javax.swing.JTextField;
 
 import jeuDeLaVie.modele.Modele;
 import jeuDeLaVie.vue.VueGraphique;
-import jeuDeLaVie.vue.VueMethode;
 
 public class EcouteurOk implements ActionListener {
 	
 	protected Modele m;
 	protected JTextField jTextFieldLargeur, jTextFieldLongueur;
 	protected VueGraphique vg;
-	protected VueMethode vm;
 
 	public EcouteurOk(Modele m, JTextField jTextFieldLargeur, JTextField jTextFieldLongueur) {
 		this.m = m;
@@ -26,14 +24,12 @@ public class EcouteurOk implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		switch(m.getDimension()){
 		case 1 :
-			if(m.getDimension() != 0 && jTextFieldLongueur.getText() != null && m.getVoisinage() != 0){
+			if(m.getDimension() != 0 && jTextFieldLongueur.getText() != null){
 				try {
 					m.setLargeur(10);
 					m.setLongueur(Integer.parseInt(jTextFieldLongueur.getText()));
 					m.creationGrille();
 					vg = new VueGraphique(m);
-					vm = new VueMethode(m);
-					m.miseAJour();
 				} catch (NumberFormatException e) {
 					System.out.println("caca");
 				}
@@ -45,14 +41,13 @@ public class EcouteurOk implements ActionListener {
 					m.setLongueur(Integer.parseInt(jTextFieldLongueur.getText()));
 					m.creationGrille();
 					vg = new VueGraphique(m);
-					vm = new VueMethode(m);
-					m.miseAJour();
-					System.out.println("LA");
 				} catch (NumberFormatException e) {
 					System.out.println("caca");
 				}
 			}
 		}
+		m.setEtapeParametrage(2);
+		m.miseAJour();
 	}
 
 }

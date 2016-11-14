@@ -10,7 +10,6 @@ public class MainGraphique {
 		
 	    Modele m = new Modele();
 	    vp = new VueParametrage(m);
-
 	}
 	
 	public static void main(String[] args) {

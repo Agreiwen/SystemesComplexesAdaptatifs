@@ -7,21 +7,21 @@ import javax.swing.JTextField;
 
 import jeuDeLaVie.modele.Modele;
 
-public class EcouteurTexteFieldLargeur implements KeyListener {
+public class EcouteurTextFieldMaxVivant implements KeyListener {
 	
 	protected Modele m;
-	protected JTextField jTextFieldLargeur;
+	protected JTextField jTextFieldMaxVivant;
 
-	public EcouteurTexteFieldLargeur(Modele m, JTextField jTextFieldY) {
+	public EcouteurTextFieldMaxVivant(Modele m, JTextField jTextFieldMaxVivant) {
 		this.m = m;
-		this.jTextFieldLargeur = jTextFieldY;
+		this.jTextFieldMaxVivant = jTextFieldMaxVivant;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ENTER){
 			try {
-				m.setLargeur(Integer.parseInt(jTextFieldLargeur.getText()));
+				m.setLongueur(Integer.parseInt(jTextFieldMaxVivant.getText()));
 				m.miseAJour();
 			} catch (NumberFormatException e1) {
 				System.out.println("caca");

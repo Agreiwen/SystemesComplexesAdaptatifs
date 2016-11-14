@@ -3,18 +3,30 @@ package jeuDeLaVie.controleur;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JTextField;
+
 import jeuDeLaVie.modele.Modele;
 
 public class EcouteurTextFieldRegle implements KeyListener {
+	
+	protected Modele m;
+	protected JTextField jTextFieldRegle;
 
-	public EcouteurTextFieldRegle(Modele m) {
-		// TODO Auto-generated constructor stub
+	public EcouteurTextFieldRegle(Modele m, JTextField jTextFieldRegle) {
+		this.m = m;
+		this.jTextFieldRegle = jTextFieldRegle;
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ENTER){
+			try {
+				m.setRegle(Integer.parseInt(jTextFieldRegle.getText()));
+				m.miseAJour();
+			} catch (NumberFormatException e1) {
+				System.out.println("caca");
+			}
+		}
 	}
 
 	@Override

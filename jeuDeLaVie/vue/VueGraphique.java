@@ -29,7 +29,7 @@ public class VueGraphique extends JFrame {
 		
 		this.setPreferredSize(new Dimension(LONGUEUR_GRILLE,LARGEUR_GRILLE));
 		Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-	    System.out.println(bounds.getMinY()+" "+bounds.getMinX());
+	    //System.out.println(bounds.getMinY()+" "+bounds.getMinX());
 	    this.setLocation((int)(bounds.getMaxX()/2+((bounds.getMaxY()*5)/100)),(int)(bounds.getMaxY()/2-LARGEUR_GRILLE/2));
 		
 		this.setVisible(true);

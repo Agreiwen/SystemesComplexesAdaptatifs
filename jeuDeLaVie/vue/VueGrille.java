@@ -52,9 +52,9 @@ public class VueGrille extends JPanel implements Observer{
 		
 		for (int i = 0; i < m.getLargeur(); i++) {
 			for (int j = 0; j < m.getLongueur(); j++) {
-				if(m.getCellule(i, j) == 0){
+				if(m.getCelluleGrille(i, j) == 0){
         			tabButton[i][j].setIcon(iconMort);
-            	}else if(m.getCellule(i, j) == 1){
+            	}else if(m.getCelluleGrille(i, j) == 1){
             		tabButton[i][j].setIcon(iconVivant);
             	}
 			}

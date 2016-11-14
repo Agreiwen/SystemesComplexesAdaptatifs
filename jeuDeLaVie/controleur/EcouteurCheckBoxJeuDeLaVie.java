@@ -6,15 +6,19 @@ import java.awt.event.ItemListener;
 import jeuDeLaVie.modele.Modele;
 
 public class EcouteurCheckBoxJeuDeLaVie implements ItemListener {
+	
+	protected Modele m;
 
 	public EcouteurCheckBoxJeuDeLaVie(Modele m) {
-		// TODO Auto-generated constructor stub
+		this.m = m;
 	}
 
 	@Override
-	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void itemStateChanged(ItemEvent e) {
+		if(e.getStateChange() == ItemEvent.SELECTED){
+			m.setMethode(1);
+			m.miseAJour();
+		}
 	}
 
 }

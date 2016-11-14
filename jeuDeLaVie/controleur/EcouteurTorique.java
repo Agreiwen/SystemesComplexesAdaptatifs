@@ -5,20 +5,22 @@ import java.awt.event.ItemListener;
 
 import jeuDeLaVie.modele.Modele;
 
-public class EcouteurCheckBoxParite implements ItemListener {
-
-	protected Modele m;
+public class EcouteurTorique implements ItemListener {
 	
-	public EcouteurCheckBoxParite(Modele m) {
+	protected Modele m;
+
+	public EcouteurTorique(Modele m) {
 		this.m = m;
 	}
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED){
-			m.setMethode(2);
-			m.miseAJour();
+			m.setTorique(true);
+		}else if(e.getStateChange() == ItemEvent.DESELECTED){
+			m.setTorique(false);
 		}
+		m.miseAJour();
 	}
 
 }
