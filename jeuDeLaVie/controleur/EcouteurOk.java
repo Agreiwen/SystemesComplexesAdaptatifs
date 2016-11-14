@@ -11,13 +11,14 @@ import jeuDeLaVie.vue.VueGraphique;
 public class EcouteurOk implements ActionListener {
 	
 	protected Modele m;
-	protected JTextField jTextFieldLargeur, jTextFieldLongueur;
+	protected JTextField jTextFieldLargeur, jTextFieldLongueur, jTexteFieldMaxVivant;
 	protected VueGraphique vg;
 
-	public EcouteurOk(Modele m, JTextField jTextFieldLargeur, JTextField jTextFieldLongueur) {
+	public EcouteurOk(Modele m, JTextField jTextFieldLargeur, JTextField jTextFieldLongueur, JTextField jTexteFieldMaxVivant) {
 		this.m = m;
 		this.jTextFieldLargeur = jTextFieldLargeur;
 		this.jTextFieldLongueur = jTextFieldLongueur;
+		this.jTexteFieldMaxVivant = jTexteFieldMaxVivant;
 	}
 
 	@Override
@@ -47,6 +48,14 @@ public class EcouteurOk implements ActionListener {
 			}
 		}
 		m.setEtapeParametrage(2);
+		if(jTexteFieldMaxVivant.getText() != null){
+			try {
+				m.setMaxVivant(Integer.parseInt(jTexteFieldMaxVivant.getText()));
+				m.genereAleatoire();
+			} catch (NumberFormatException e) {
+				System.out.println("caca");
+			}
+		}
 		m.miseAJour();
 	}
 

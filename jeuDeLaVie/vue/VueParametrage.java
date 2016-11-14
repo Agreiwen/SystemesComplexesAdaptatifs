@@ -144,7 +144,7 @@ public class VueParametrage extends JFrame implements Observer{
 	    
 	    jPanelOk = new JPanel();
 	    jBouttonOk = new JButton("Ok");
-	    jBouttonOk.addActionListener(new EcouteurOk(m,jTextFieldLargeur,jTextFieldLongueur));
+	    jBouttonOk.addActionListener(new EcouteurOk(m,jTextFieldLargeur,jTextFieldLongueur,jTextFieldMaxVivant));
 	    jPanelOk.add(jBouttonOk);
 	    jBouttonGo = new JButton("Go !");
 	    jBouttonGo.addActionListener(new EcouteurGo(m));
@@ -242,7 +242,7 @@ public class VueParametrage extends JFrame implements Observer{
 			break;
 		}
 		
-		System.out.println(toString()+"\n");
+		//System.out.println(toString()+"\n");
 	}
 
 }

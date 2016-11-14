@@ -3,6 +3,7 @@ package jeuDeLaVie.modele;
 import java.util.Observable;
 
 import jeuDeLaVie.modele.Grille;
+import jeuDeVie.modele.Carte.TypeMap;
 
 public class Modele extends Observable implements Runnable{
 	
@@ -139,6 +140,15 @@ public class Modele extends Observable implements Runnable{
 		copie = new Grille(largeur, longueur);
 	}
 	
+	public void genereAleatoire(){
+		int randomI, randomJ;
+		for (int i = 0; i < maxVivant; i++) {
+			randomI = (int) Math.round((int)( Math.random()*( largeur - 1 )));
+			randomJ = (int) Math.round((int)( Math.random()*( longueur - 1 )));
+			setCelluleGrille(randomI, randomJ, 1);
+		}
+	}
+	
 	public int nbVoisin(int voisinage, int i, int j) {
 		if(voisinage == 1){
 			if(torique == true){
@@ -158,13 +168,17 @@ public class Modele extends Observable implements Runnable{
 	public void iterationJeuDeLaVie(){
 		for (int i = 0; i < largeur; i++) {
 			for (int j = 0; j < longueur; j++) {
-				if(grille.getCellule(i, j) == 0){
-					if(nbVoisin(voisinage, i, j) == 3){
+				if(getCelluleGrille(i, j) == 0){
+					if(nbVoisin(voisinage,i,j) == 3){
 						copie.setCellule(i, j, 1);
+					}else{
+						copie.setCellule(i, j, 0);
 					}
 				}
 				else{
-					if(nbVoisin(voisinage, i, j) >= 2 && nbVoisin(voisinage, i, j) <= 3){
+					if(nbVoisin(voisinage,i,j) < 2 || nbVoisin(voisinage,i,j) > 3){
+						copie.setCellule(i, j, 0);
+					}else{
 						copie.setCellule(i, j, 1);
 					}
 				}
@@ -200,7 +214,7 @@ public class Modele extends Observable implements Runnable{
 			//Jeu de la vie
 			while(true){
 				try {
-					Thread.sleep(100);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -215,7 +229,7 @@ public class Modele extends Observable implements Runnable{
 		case 2 :
 			while(true){
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
