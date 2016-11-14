@@ -11,24 +11,27 @@ import jeuDeLaVie.vue.VueGraphique;
 public class EcouteurOk implements ActionListener {
 	
 	protected Modele m;
-	protected JTextField jTextFieldLargeur, jTextFieldLongueur, jTexteFieldMaxVivant;
+	protected JTextField jTextFieldLargeur, jTextFieldLongueur, jTexteFieldMaxVivant, jTexteFieldRegle, jTextFieldHistorique;
 	protected VueGraphique vg;
 
-	public EcouteurOk(Modele m, JTextField jTextFieldLargeur, JTextField jTextFieldLongueur, JTextField jTexteFieldMaxVivant) {
+	public EcouteurOk(Modele m, JTextField jTextFieldLargeur, JTextField jTextFieldLongueur, JTextField jTexteFieldMaxVivant, JTextField jTexteFieldRegle, JTextField jTextFieldHistorique) {
 		this.m = m;
 		this.jTextFieldLargeur = jTextFieldLargeur;
 		this.jTextFieldLongueur = jTextFieldLongueur;
 		this.jTexteFieldMaxVivant = jTexteFieldMaxVivant;
+		this.jTexteFieldRegle = jTexteFieldRegle;
+		this.jTextFieldHistorique = jTextFieldHistorique;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		switch(m.getDimension()){
 		case 1 :
-			if(m.getDimension() != 0 && jTextFieldLongueur.getText() != null){
+			if(m.getDimension() != 0 && jTextFieldLongueur.getText() != null && jTexteFieldRegle.getText() != null && jTextFieldHistorique.getText() != null){
 				try {
-					m.setLargeur(10);
+					m.setLargeur(Integer.parseInt(jTextFieldHistorique.getText()));
 					m.setLongueur(Integer.parseInt(jTextFieldLongueur.getText()));
+					m.setRegle(Integer.parseInt(jTexteFieldRegle.getText()));
 					m.creationGrille();
 					vg = new VueGraphique(m);
 				} catch (NumberFormatException e) {

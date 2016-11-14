@@ -30,7 +30,11 @@ public class EcouteurBoutonGrille implements ActionListener {
 			}
 			break;
 		case 3 :
-			//System.out.println(m.nbVoisin(m.getVoisinage(), positionI, positionJ));
+			/*System.out.println(m.getGrille().toString());
+			m.iterationRegle();
+			System.out.println(m.getCopieLigne().toString());
+			m.copieLigneDansGrille();
+			System.out.println(m.getGrille().toString());*/
 			break;
 		}
 		m.miseAJour();

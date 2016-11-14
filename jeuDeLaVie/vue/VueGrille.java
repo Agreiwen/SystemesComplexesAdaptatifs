@@ -42,7 +42,7 @@ public class VueGrille extends JPanel implements Observer{
 					tabButton[i][j].addActionListener(new EcouteurBoutonGrille(m, i, j));
 					tabButton[i][j].setContentAreaFilled(false);
             		tabButton[i][j].setFocusPainted(false);
-            		if(m.getDimension() == 1 && i > 0){
+            		if(m.getDimension() == 1 && m.getEtapeParametrage() == 2 && i > 0){
 						 tabButton[i][j].setEnabled(false); 
 					}
 				}
@@ -52,6 +52,9 @@ public class VueGrille extends JPanel implements Observer{
 		
 		for (int i = 0; i < m.getLargeur(); i++) {
 			for (int j = 0; j < m.getLongueur(); j++) {
+				if(m.getDimension() == 1 && m.getEtapeParametrage() != 2){
+					tabButton[i][j].setEnabled(true);
+				}
 				if(m.getCelluleGrille(i, j) == 0){
         			tabButton[i][j].setIcon(iconMort);
             	}else if(m.getCelluleGrille(i, j) == 1){

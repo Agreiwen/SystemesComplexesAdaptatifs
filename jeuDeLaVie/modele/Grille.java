@@ -4,6 +4,7 @@ public class Grille {
 	
 	private int[][] jeu;
 	private int largeur, longueur;
+	private Regle r;
 	
 	public Grille(int largeur, int longueur){
 		this.largeur = largeur;
@@ -102,6 +103,22 @@ public class Grille {
 		nbVoisin += getCellule(maxLargeur, j);
 		nbVoisin += getCellule(maxLargeur, maxLongeur);
 		return nbVoisin;
+	}
+	
+	public int voisinGauche(int i){
+		return getCellule(0, ((i-1)+longueur)%longueur);
+	}
+	
+	public int voisinDroit(int i){
+		return getCellule(0, ((i+1)+longueur)%longueur);
+	}
+	
+	public int[] getLigne(int i){
+		return jeu[i];
+	}
+	
+	public void setLigne(int[] ligne, int i){
+		jeu[i] = ligne;
 	}
 	
 	public String toString(){

@@ -2,9 +2,6 @@ package jeuDeLaVie.modele;
 
 import java.util.Observable;
 
-import jeuDeLaVie.modele.Grille;
-import jeuDeVie.modele.Carte.TypeMap;
-
 public class Modele extends Observable implements Runnable{
 	
 	protected int dimension;
@@ -13,15 +10,17 @@ public class Modele extends Observable implements Runnable{
 	protected int voisinage;
 	protected boolean initialise;
 	protected int methode;
-	protected int regle;
 	protected int maxVivant;
 	protected int etapeParametrage;
-	protected Grille grille, copie;
+	protected Grille grille, copie, copieLigne;
 	protected boolean torique;
+	protected Regle regle;
+	protected int tailleHistorique;
 	
 	public Modele(){
 		setInitialise(false);
 		setEtapeParametrage(1);
+		setTailleHistorique(10);
 	}
 	
 	public boolean isTorique() {
@@ -32,8 +31,20 @@ public class Modele extends Observable implements Runnable{
 		this.torique = torique;
 	}
 	
+	public int getTailleHistorique() {
+		return tailleHistorique;
+	}
+
+	public void setTailleHistorique(int tailleHistorique) {
+		this.tailleHistorique = tailleHistorique;
+	}
+	
 	public int getDimension() {
 		return dimension;
+	}
+	
+	public void setDimension(int dimension) {
+		this.dimension = dimension;
 	}
 
 	public int getEtapeParametrage() {
@@ -43,9 +54,13 @@ public class Modele extends Observable implements Runnable{
 	public void setEtapeParametrage(int etapeParametrage) {
 		this.etapeParametrage = etapeParametrage;
 	}
+	
+	public Regle getRegle() {
+		return regle;
+	}
 
-	public void setDimension(int dimension) {
-		this.dimension = dimension;
+	public void setRegle(int regle) {
+		this.regle = new Regle(regle);
 	}
 
 	public int getLargeur() {
@@ -97,14 +112,6 @@ public class Modele extends Observable implements Runnable{
 	public void setMethode(int methode) {
 		this.methode = methode;
 	}
-	
-	public int getRegle() {
-		return regle;
-	}
-
-	public void setRegle(int regle) {
-		this.regle = regle;
-	}
 
 	public int getMaxVivant() {
 		return maxVivant;
@@ -130,6 +137,14 @@ public class Modele extends Observable implements Runnable{
 		this.copie = copie;
 	}
 	
+	public Grille getCopieLigne() {
+		return copieLigne;
+	}
+
+	public void setCopieLigne(Grille copieLigne) {
+		this.copieLigne = copieLigne;
+	}
+	
 	public void miseAJour() {
 		this.setChanged();
 		this.notifyObservers();
@@ -138,6 +153,7 @@ public class Modele extends Observable implements Runnable{
 	public void creationGrille() {
 		grille = new Grille(largeur,longueur);
 		copie = new Grille(largeur, longueur);
+		copieLigne = new Grille(1, longueur);
 	}
 	
 	public void genereAleatoire(){
@@ -198,6 +214,27 @@ public class Modele extends Observable implements Runnable{
 		}
 	}
 	
+	public void iterationRegle(){
+		int voisinGauche, milieu, voisinDroit;
+		for (int j = 0; j < longueur; j++) {
+			voisinGauche =  grille.voisinGauche(j);
+			milieu = getCelluleGrille(0, j);
+			voisinDroit =  grille.voisinDroit(j);
+			copieLigne.setCellule(0, j, regle.getValeur(voisinGauche, milieu, voisinDroit));
+		}
+	}
+	
+	public void copieLigneDansGrille(){
+		int[] tabAux = new int[1];
+		for (int i = largeur-1; i > 0; i--) {
+			tabAux = grille.getLigne(i-1);
+			grille.setLigne(tabAux, i);
+		}
+		grille.setLigne(copieLigne.getLigne(0), 0);
+		copieLigne.grilleVide();
+		miseAJour();
+	}
+	
 	public void copieDansGrille(){
 		for (int i = 0; i < largeur; i++) {
 			for (int j = 0; j < longueur; j++) {
@@ -209,9 +246,7 @@ public class Modele extends Observable implements Runnable{
 
 	@Override
 	public void run() {
-		switch(getMethode()){
-		case 1:
-			//Jeu de la vie
+		if(getDimension() == 1){
 			while(true){
 				try {
 					Thread.sleep(200);
@@ -219,25 +254,41 @@ public class Modele extends Observable implements Runnable{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				iterationJeuDeLaVie();
-				if(grille.equals(copie))
-					break;
-			    copieDansGrille();
-			    //copie.grilleVide();
+				iterationRegle();
+				copieLigneDansGrille();
 			}
-			break;
-		case 2 :
-			while(true){
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		}else if(getDimension() == 2){
+			switch(getMethode()){
+			case 1:
+				//Jeu de la vie
+				while(true){
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					iterationJeuDeLaVie();
+					if(grille.equals(copie))
+						break;
+				    copieDansGrille();
+				    //copie.grilleVide();
 				}
-				iterationParite();
-				if(grille.equals(copie))
-					break;
-			    copieDansGrille();
+				break;
+			case 2 :
+				//Parite
+				while(true){
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					iterationParite();
+					if(grille.equals(copie))
+						break;
+				    copieDansGrille();
+				}
 			}
 		}
 	}

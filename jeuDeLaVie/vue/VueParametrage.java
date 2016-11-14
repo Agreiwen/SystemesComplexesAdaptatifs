@@ -22,6 +22,7 @@ import jeuDeLaVie.controleur.EcouteurGo;
 import jeuDeLaVie.controleur.EcouteurMoore8;
 import jeuDeLaVie.controleur.EcouteurMoore9;
 import jeuDeLaVie.controleur.EcouteurOk;
+import jeuDeLaVie.controleur.EcouteurTextFieldHistorique;
 import jeuDeLaVie.controleur.EcouteurTextFieldMaxVivant;
 import jeuDeLaVie.controleur.EcouteurTextFieldRegle;
 import jeuDeLaVie.controleur.EcouteurTexteFieldLargeur;
@@ -59,8 +60,10 @@ public class VueParametrage extends JFrame implements Observer{
 	protected JLabel jLabelTexteMethode;
 	protected JLabel jLabelMaxVivant;
 	protected JLabel jLabelRegle;
+	protected JLabel jLabelHistorique;
 	protected JTextField jTextFieldMaxVivant;
 	protected JTextField jTextFieldRegle;
+	protected JTextField jTextFieldHistorique;
 	protected JCheckBox jCheckBoxJeuDeLaVie;
 	protected JCheckBox jCheckBoxParite;
 
@@ -138,13 +141,18 @@ public class VueParametrage extends JFrame implements Observer{
 	    jLabelMaxVivant = new JLabel("Max Vivant");
 	    jTextFieldMaxVivant = new JTextField(3);
 	    jTextFieldMaxVivant.addKeyListener(new EcouteurTextFieldMaxVivant(m, jTextFieldMaxVivant));
+	    jLabelHistorique = new JLabel("Historique");
+	    jTextFieldHistorique = new JTextField(3);
+	    jTextFieldHistorique.addKeyListener(new EcouteurTextFieldHistorique(m, jTextFieldHistorique));
 	    jPanelMaxVivant.add(jLabelMaxVivant);
 	    jPanelMaxVivant.add(jTextFieldMaxVivant);
+	    jPanelMaxVivant.add(jLabelHistorique);
+	    jPanelMaxVivant.add(jTextFieldHistorique);
 	    this.add(jPanelMaxVivant);
 	    
 	    jPanelOk = new JPanel();
 	    jBouttonOk = new JButton("Ok");
-	    jBouttonOk.addActionListener(new EcouteurOk(m,jTextFieldLargeur,jTextFieldLongueur,jTextFieldMaxVivant));
+	    jBouttonOk.addActionListener(new EcouteurOk(m,jTextFieldLargeur,jTextFieldLongueur,jTextFieldMaxVivant,jTextFieldRegle,jTextFieldHistorique));
 	    jPanelOk.add(jBouttonOk);
 	    jBouttonGo = new JButton("Go !");
 	    jBouttonGo.addActionListener(new EcouteurGo(m));
@@ -202,6 +210,9 @@ public class VueParametrage extends JFrame implements Observer{
 			jCheckBoxMoore9.setSelected(false);
 			jLabelRegle.setEnabled(true);
 			jTextFieldRegle.setEnabled(true);
+			jCheckBoxTorique.setEnabled(false);
+			jLabelHistorique.setEnabled(true);
+			jTextFieldHistorique.setEnabled(true);
 		}else{
 			jCheckBoxUneDimension.setSelected(false);
 			jTextFieldLargeur.setEnabled(true);
@@ -213,6 +224,9 @@ public class VueParametrage extends JFrame implements Observer{
 			jCheckBoxMoore9.setEnabled(true);
 			jLabelRegle.setEnabled(false);
 			jTextFieldRegle.setEnabled(false);
+			jCheckBoxTorique.setEnabled(true);
+			jLabelHistorique.setEnabled(false);
+			jTextFieldHistorique.setEnabled(false);
 			if(m.getMethode() == 1){
 				jCheckBoxParite.setSelected(false);
 			}else{
@@ -241,7 +255,6 @@ public class VueParametrage extends JFrame implements Observer{
 			jBouttonFermer.setVisible(true);
 			break;
 		}
-		
 		//System.out.println(toString()+"\n");
 	}
 
