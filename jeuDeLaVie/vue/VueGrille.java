@@ -18,8 +18,8 @@ public class VueGrille extends JPanel implements Observer{
 	protected JButton jButtonMort;
 	protected JButton jButtonVivant;
 	
-	protected ImageIcon iconMort = new ImageIcon(VueGrille.class.getResource("/jeuDevie/folder/mort.png"));
-	protected ImageIcon iconVivant = new ImageIcon(VueGrille.class.getResource("/jeuDeVie/folder/vivant.png"));
+	protected ImageIcon iconMort = new ImageIcon(VueGrille.class.getResource("/jeuDeLaVie/folder/mort.png"));
+	protected ImageIcon iconVivant = new ImageIcon(VueGrille.class.getResource("/jeuDeLaVie/folder/vivant.png"));
 	
 	protected JButton[][] tabButton;
 	

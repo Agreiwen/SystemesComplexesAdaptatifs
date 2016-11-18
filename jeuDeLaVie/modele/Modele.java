@@ -158,11 +158,22 @@ public class Modele extends Observable implements Runnable{
 	
 	public void genereAleatoire(){
 		int randomI, randomJ;
-		for (int i = 0; i < maxVivant; i++) {
-			randomI = (int) Math.round((int)( Math.random()*( largeur - 1 )));
-			randomJ = (int) Math.round((int)( Math.random()*( longueur - 1 )));
-			setCelluleGrille(randomI, randomJ, 1);
+		switch(dimension){
+		case 1 :
+			for (int i = 0; i < maxVivant; i++) {
+				randomJ = (int) Math.round((int)( Math.random()*( longueur - 1 )));
+				setCelluleGrille(0, randomJ, 1);
+			}
+			break;
+		case 2 :
+			for (int i = 0; i < maxVivant; i++) {
+				randomI = (int) Math.round((int)( Math.random()*( largeur - 1 )));
+				randomJ = (int) Math.round((int)( Math.random()*( longueur - 1 )));
+				setCelluleGrille(randomI, randomJ, 1);
+			}
+			break;
 		}
+		
 	}
 	
 	public int nbVoisin(int voisinage, int i, int j) {
