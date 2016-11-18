@@ -1,8 +1,8 @@
-package jeuDeVie.modele;
+package jeuDeLaVie.performance;
 
 import java.util.Observable;
 
-import jeuDeVie.modele.Carte.TypeMap;
+import jeuDeLaVie.performance.Carte.TypeMap;
 
 public class Modele extends Observable implements Runnable{
 	

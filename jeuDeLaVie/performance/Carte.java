@@ -1,4 +1,4 @@
-package jeuDeVie.modele;
+package jeuDeLaVie.performance;
 
 public class Carte {
 	

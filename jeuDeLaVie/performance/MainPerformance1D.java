@@ -1,10 +1,10 @@
-package moi;
+package jeuDeLaVie.performance;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class MainIntelligent {
+public class MainPerformance1D {
 	
 	public static int LARGEUR;
 	public static String NOM_FICHIER;
@@ -15,7 +15,7 @@ public class MainIntelligent {
 	public int[] tabDepart;
 	public int nbCoup;
 	
-	public MainIntelligent(int largeur, String nomFichier){
+	public MainPerformance1D(int largeur, String nomFichier){
 		LARGEUR = largeur;
 		NOM_FICHIER = nomFichier;
 		initTab();
@@ -185,7 +185,7 @@ public class MainIntelligent {
 		//int largeur = (int)((Math.random()*32)+1)*3;
 		int largeur = 27;
 		String nomFichier = "resultat.txt";
-		MainIntelligent m = new MainIntelligent(largeur,nomFichier);
+		MainPerformance1D m = new MainPerformance1D(largeur,nomFichier);
 		int iteration = 3000000;
 		m.algoGenetique(iteration);
 		//m.ecrire(NOM_FICHIER, LARGEUR+"\n");

@@ -1,6 +1,7 @@
-package jeuDeLaVie.vue;
+package jeuDeLaVie;
 
 import jeuDeLaVie.modele.Modele;
+import jeuDeLaVie.vue.VueParametrage;
 
 public class MainGraphique {
 	

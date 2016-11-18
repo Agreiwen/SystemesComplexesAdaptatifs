@@ -1,6 +1,6 @@
-package jeuDeVie.modele;
+package jeuDeLaVie.performance;
 
-import jeuDeVie.modele.Carte.TypeMap;
+import jeuDeLaVie.performance.Carte.TypeMap;
 
 public class Grille {
 	
